@@ -1,0 +1,10 @@
+title Zomato and OpenWeahterAPP Flow
+
+User->localhost3000:HTTPS GET /
+localhost3000->User:HTTPS 200 OK+ index.html
+User->localhost3000:HTTPS GET/search?city=NewYork
+localhost3000->1st API zomato:HTTPS POST(GET) \nhostname : developers.zomato.com\npath :/api/v2.1/locations?query=' + Newyork\nHeaders : user-key : 52285bab...
+1st API zomato->localhost3000:HTTPS 200 OK + JSON format of city info
+localhost3000->2nd API open weahter APP:HTTPS POST(GET) \nhostname: api.openweathermap.org\n path: /data/2.5/weather?lat=' 40.71 '&lon=' -74.01 '&appid=2855a7099169f4212835c88325ff196c\nmethod: GET
+2nd API open weahter APP->localhost3000: HTTPS 200 OK + JSON format of weather info
+localhost3000->User:HTTPS 200 OK + weather infomation
